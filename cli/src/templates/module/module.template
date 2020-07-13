@@ -1,0 +1,54 @@
+import * as path from "path";
+import { Module, HttpModule } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { databaseConfig } from "./config/database.config";
+import {
+  initializeTransactionalContext,
+  patchTypeORMRepositoryWithBaseRepository,
+} from "typeorm-transactional-cls-hooked";
+import { I18nModule, I18nJsonParser, I18nService } from "nestjs-i18n";
+import { BaseEntity } from "../common/entities/base.entity";
+import { ConstantsEnum } from "./constants.enum";
+
+/*IMPORTS*/
+
+
+@Module({
+  controllers: [ /*CONTROLLERS*/],
+  providers: [ /*PROVIDERS*/],
+  imports: [
+    I18nModule.forRoot({
+      fallbackLanguage: "en",
+      parser: I18nJsonParser,
+      parserOptions: {
+        path: path.join(__dirname, "/i18n/"),
+        watch: true,
+      },
+    }),
+    ConfigModule.forRoot({
+      envFilePath: [
+        process.env.NODE_ENV
+          ? `src/{{lcModuleName}}/.env.${process.env.NODE_ENV}`
+          : "src/{{lcModuleName}}/.env",
+        ".env.default",
+      ],
+    }),
+    HttpModule,
+    //Creating a connection per module
+    TypeOrmModule.forRoot({
+      ...databaseConfig(),
+      name: ConstantsEnum.connectionName,
+    }),
+    TypeOrmModule.forFeature(
+      [/*FEATURES*/],
+      ConstantsEnum.connectionName
+    ),
+  ],
+})
+export class {{moduleName}} {
+  constructor() {
+    initializeTransactionalContext();
+    patchTypeORMRepositoryWithBaseRepository();
+  }
+}

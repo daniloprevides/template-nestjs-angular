@@ -1,0 +1,9 @@
+import { EntityRepository } from "typeorm";
+import { {{name}}Entity } from "../entities/{{lcname}}.entity";
+import { RepositoryBase } from "../../common/repository/repository.base";
+
+@EntityRepository({{name}}Entity)
+export class {{name}}Repository extends RepositoryBase<{{name}}Entity>{
+
+    
+}

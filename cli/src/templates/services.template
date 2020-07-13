@@ -1,0 +1,24 @@
+
+import { Injectable } from "@nestjs/common";
+import { {{name}}Repository } from "../repository/{{lcname}}.repository";
+import { ServiceBase } from "./services.base";
+import { I18nService } from "nestjs-i18n";
+import { InjectRepository } from "@nestjs/typeorm";
+import { BaseEntity } from "../entities/base.entity";
+import { ConstantsEnum } from "../constants.enum";
+import { RepositoryBase } from "../../common/repository/repository.base";
+
+@Injectable()
+export class {{name}}Service<T extends BaseEntity> extends ServiceBase<T> {
+  constructor(
+    protected readonly i18n: I18nService,
+    @InjectRepository({{name}}Repository, ConstantsEnum.connectionName)
+    protected readonly {{lcname}}Repository: {{name}}Repository
+  ) {
+    super(
+      i18n,
+      {{name}}Service.name,
+      ({{lcname}}Repository as unknown) as RepositoryBase<T>
+    );
+  }
+}

@@ -1,0 +1,91 @@
+
+import { Controller, Get, Query, Param, Put, Body, Post, Delete} from "@nestjs/common";
+import { ConstantsEnum } from "../constants.enum";
+import { {{name}}Entity } from "../entities/{{lcname}}.entity";
+import { {{name}}Service } from "../services/{{lcname}}.service";
+import { BaseController } from "./base.controller";
+import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { PaginatorDTO } from "../../common/dto/paginator.dto";
+import { PaginationQueryDTO } from "../../common/dto/pagination-query.dto";
+import { ResultPaginatorDTO } from "../../common/dto/result-paginator.dto";
+
+
+@Controller(ConstantsEnum.{{lcname}})
+@ApiTags("{{name}}")
+export class {{name}}Controller extends BaseController<{{name}}Entity>{
+
+    constructor(protected readonly {{lcname}}Service:{{name}}Service<{{name}}Entity> ){
+        super({{lcname}}Service);
+    }
+
+    @Get()
+    @ApiOperation({
+        summary: "Get All Items ({{name}})",
+        description: "Returns all items according to parameters ({{name}})",
+    })
+    @ApiResponse({
+        status: 200,
+        type: () => ResultPaginatorDTO,
+        description: "Pagination Result",
+    })
+    public getAll(@Query() query: PaginationQueryDTO): Promise<PaginatorDTO<{{name}}Entity>> {
+        if (!query) query = new PaginationQueryDTO();
+        return this.{{lcname}}Service.getPaginated(query.page, query.size);
+    }
+
+    @Get(":id")
+    @ApiOperation({
+        summary: "Get Item by ID ({{name}})",
+        description: "Returns single item by ID ({{name}})",
+    })
+    @ApiResponse({
+        status: 200,
+        description: "Item",
+        type: () => {{name}}Entity,
+    })
+    public getItem(@Param("id") id: string): Promise<{{name}}Entity> {
+        return this.{{lcname}}Service.getById(id);
+    }
+
+    @Put(":id")
+    @ApiOperation({
+        summary: "Update Item by ID ({{name}})",
+        description: "Returns updated item ({{name}})",
+    })
+    @ApiResponse({
+        status: 200,
+        description: "Updated Item",
+        type: () => {{name}}Entity,
+    })
+    public update(@Param("id") id: string, @Body() item: {{name}}Entity) {
+        return this.{{lcname}}Service.update(id, item);
+    }
+
+    @Post()
+    @ApiOperation({
+        summary: "Create a new Item ({{name}})",
+        description: "Returns created item ({{name}})",
+    })
+    @ApiResponse({
+        status: 201,
+        description: "New Item",
+        type: () => {{name}}Entity,
+    })
+    public add(@Body() item: {{name}}Entity) {
+        return this.{{lcname}}Service.add(item);
+    }
+
+    @Delete(":id")
+    @ApiOperation({
+        summary: "Deletes an item ({{name}})",
+    })
+    @ApiResponse({
+        status: 200,
+        description: "Deleted item",
+        type: () => {{name}}Entity,
+    })    
+    public delete(@Param("id") id: string) {
+        return this.{{lcname}}Service.delete(id);
+    }
+
+}
