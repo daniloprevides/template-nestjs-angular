@@ -1,0 +1,4 @@
+{
+    "VALIDATE_NAME_MAX_LENGTH": "The max length for this field is {maxLength}",
+    "ITEM_NOT_FOUND": "Item not found"
+  }

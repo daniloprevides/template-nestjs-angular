@@ -4,7 +4,7 @@ A simple template of a base server nestjs project, and angular 10 client, and a 
 ## Projects
 This workspace contains 3 projects
 
-### API
+### SERVER
 A nestjs api project, supporting translation, typeorm, openapi and etc.
 
 ### CLIENT
