@@ -6,7 +6,7 @@ import { clear } from "console";
 import fs from "fs";
 
 export class Main {
-  sourcePath = "../../api/src";
+  sourcePath = "../../server/src";
   templatesPath = "./templates";
   constructor() {
     this.start();

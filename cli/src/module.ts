@@ -6,8 +6,8 @@ import { clear } from "console";
 import fs from "fs";
 
 export class Main {
-  sourcePath = "../../api/src";
-  modulePath = "../../api/src/app.module.ts";
+  sourcePath = "../../server/src";
+  modulePath = "../../server/src/app.module.ts";
   templatesPath = "./templates/module";
   constructor() {
     this.start();
@@ -53,9 +53,11 @@ export class Main {
       console.error("O módulo existe", srcPath);
       return;
     }else{
+      console.log(`Folder does not exists, creating...`,srcPath);
       fs.mkdirSync(srcPath);
     }
 
+    console.log(`Folder created`,srcPath);
     await this.createFolderStructure(srcPath);
     await this.createEnvFiles(srcPath);
     await this.createConfig(this.templatesPath,srcPath);
