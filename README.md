@@ -12,3 +12,5 @@ An angular 10 project accessing this server
 
 ### CLI
 A simple class generator to make modules creation easier
+yarn api -> Create a new API File
+yarn module -> Create a new module structure file
