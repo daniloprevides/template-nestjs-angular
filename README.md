@@ -1,14 +1,14 @@
 # template-nestjs-angular
 A simple template of a base server nestjs project, and angular 10 client, and a client generator
 
-##Projects
+## Projects
 This workspace contains 3 projects
 
-###API
+### API
 A nestjs api project, supporting translation, typeorm, openapi and etc.
 
-###CLIENT
+### CLIENT
 An angular 10 project accessing this server
 
-###CLI
+### CLI
 A simple class generator to make modules creation easier
