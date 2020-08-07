@@ -32,7 +32,7 @@
     "@types/passport-jwt": "^3.0.3",
     "@types/passport-local": "^1.0.33",
     "api-npm": "^1.0.0",
-    "class-transformer": "^0.2.0",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "fastify-swagger": "^3.1.1",
     "mysql": "^2.18.1",
